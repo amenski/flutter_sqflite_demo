@@ -8,20 +8,16 @@ class LoginService {
  
   Future<int> saveUser(User user) async {
     var db = await dbHandler.getDatabase;
-    return await db.insert("User", new Map.from(Constants.initialUserDetails));
-  }
- 
-  Future<int> deleteUser(User user) async {
-    var db = await dbHandler.getDatabase;
-    return await db.delete("User");
+    return await db.insert(Constants.USER_TABLE_NAME, new Map.from(Constants.initialUserDetails));
   }
  
   Future<User> login(String user, String password) async {
+
     var db = await dbHandler.getDatabase;
-    var res = await db.query('User', 
-                          distinct: true, 
-                          where: 'userName' + '=?' + 'password' + '=?',
-                          whereArgs: [user, password]);//rawQuery("SELECT * FROM user WHERE username = '$user' and password = '$password'");
+    var res = await db.query(Constants.USER_TABLE_NAME, 
+                                distinct: true, 
+                                where: 'userName' + '=?' + ' and ' + 'password' + '=?',
+                                whereArgs: [user, password]);//rawQuery("SELECT * FROM user WHERE username = '$user' and password = '$password'");
     
     if (res.length > 0) {
       return new User(userName: null, password: null).fromMap(res.first);
@@ -32,7 +28,7 @@ class LoginService {
  
   Future<List<User>> getAllUser() async {
     var dbClient = await dbHandler.getDatabase;
-    var res = await dbClient.query("user");
+    var res = await dbClient.query(Constants.USER_TABLE_NAME);
     
     List<User> list = res.isNotEmpty 
             ? res.map((c) 

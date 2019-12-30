@@ -29,14 +29,16 @@ class DatabaseHandler {
 
     appDocDir = await getApplicationDocumentsDirectory();
     if(appDocDir != null) {
-      path = appDocDir.path + Constants.DATABASE_NAME;
+      path = join(appDocDir.path, Constants.DATABASE_FILE_NAME);
     }
-    // if the database already exist
+    
+    // Return if the database already exist
+    // https://github.com/tekartik/sqflite/blob/master/sqflite/doc/opening_asset_db.md
     if(path != null && (FileSystemEntity.typeSync(path) == FileSystemEntityType.file))
       return await openDatabase(path);
     
     // If does not exist, copy from assets folder
-    ByteData data = await rootBundle.load(join('data', Constants.DATABASE_NAME));
+    ByteData data = await rootBundle.load(join('assets/data', Constants.DATABASE_FILE_NAME));
     List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
     // Save copied asset to documents

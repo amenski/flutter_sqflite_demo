@@ -5,5 +5,4 @@ class Util {
   
   factory Util() => _instance; 
 
-
 }

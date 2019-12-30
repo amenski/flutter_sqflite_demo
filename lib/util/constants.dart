@@ -1,6 +1,7 @@
 class Constants {
-  static const DATABASE_NAME = "flutter_demo.db";
+  static const USER_TABLE_NAME = "user";
+  static const DATABASE_FILE_NAME = "flutter_demo.db";
 
 
- static const initialUserDetails = {'id': '1', 'userName': 'amanita', 'password': 'pass'};
+ static const initialUserDetails = {'id': '1', 'user_name': 'amanita', 'password': 'pass'};
 }
