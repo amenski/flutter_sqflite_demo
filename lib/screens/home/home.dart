@@ -75,8 +75,9 @@ class _Home extends State<Home> {
   }
 
   _handleValidUser(User user, BuildContext context) {
-    final snackBar = SnackBar(content: Text('Logged in succesfully!'));
+    String message = (user != null) ? 'Logged in succesfully!' : 'Login error!';
+    
+    final snackBar = SnackBar(content: Text(message));
     Scaffold.of(context).showSnackBar(snackBar);
-    print(user.getUsername);
   }
 }

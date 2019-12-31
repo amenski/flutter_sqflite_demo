@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       ),
       home: new Scaffold(
         appBar: AppBar(
-          title: Text("Sqflite login"),
+          title: Text("Login"),
         ),
         body: Home(),
       ),
